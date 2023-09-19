@@ -1,0 +1,5 @@
+services:
+  clean_theme.route_subscriber:
+    class: Drupal\clean_theme\EventSubscriber\CustomPermissionFormSubscriber
+    tags:
+      - { name: event_subscriber }

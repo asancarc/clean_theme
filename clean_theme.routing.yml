@@ -1,0 +1,7 @@
+clean_theme.custom_permissions:
+  path: '/clean-theme/custom-permissions'
+  defaults:
+    _title: 'Custom permissions'
+    _form: 'Drupal\clean_theme\Form\CustomPermissionsForm'
+  requirements:
+    _permission: 'access content'
