@@ -1,5 +1,7 @@
-name: clean theme
+name: Clean theme
 type: module
-description: Provides additional functionality for the site.
-package: Custom
+description: Provides additional functionality for permissions page.
+package: Administration
 core_version_requirement: ^9 || ^10
+dependencies:
+  - drupal:system

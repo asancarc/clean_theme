@@ -4,4 +4,4 @@ clean_theme.custom_permissions:
     _title: 'Custom permissions'
     _form: 'Drupal\clean_theme\Form\CustomPermissionsForm'
   requirements:
-    _permission: 'access content'
+    _permission: 'administer permissions'

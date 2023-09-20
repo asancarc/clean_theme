@@ -1,0 +1,10 @@
+{
+    "name": "drupal/clean_theme",
+    "description": "Clear permissions admin page.",
+    "authors": [
+        {
+            "name": "Adrian Sanchez Carchano"
+        }
+    ],
+    "require": {}
+}
