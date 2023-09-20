@@ -1,10 +1,19 @@
 {
     "name": "drupal/clean_theme",
     "description": "Clear permissions admin page.",
+    "type": "drupal-module",
+    "license": "GPL-2.0-or-later",
+    "minimum-stability": "dev",
+    "homepage": "https://drupal.org",
     "authors": [
         {
-            "name": "Adrian Sanchez Carchano"
+            "name": "Adrian Sanchez Carchano",
+            "homepage": "https://www.drupal.org/u/adrian-sanchez-carchano",
+            "role": "Maintainer"
+
         }
     ],
-    "require": {}
+    "require": {
+        "drupal/core": "^10"
+    }
 }
