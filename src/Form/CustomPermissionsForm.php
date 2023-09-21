@@ -52,32 +52,15 @@ class CustomPermissionsForm extends UserPermissionsForm {
       '#attributes' => ['class' => ['permissions', 'js-permissions']],
       '#sticky' => TRUE,
     ];
-    foreach ($role_names as $name) {
-      $form['permissions']['#header'][] = [
-        'data' => $name,
-        'class' => ['checkbox'],
-      ];
-    }
 
     foreach ($this->permissionsByProvider() as $provider => $permissions) {
       // Module name.
-      /*$form['permissions'][$provider] = [
-        [
-          '#type' => 'details',
-          '#title' => $this->moduleHandler->getName($provider),
-          '#wrapper_attributes' => [
-            'colspan' => count($role_names) + 1,
-            'class' => ['module aqui nen'],
-            'id' => 'module-' . $provider,
-          ],
-        ],
-      ];*/
       $form['permissions'][$provider][$this->moduleHandler->getName($provider)] = [        
           '#type' => 'details',
           '#title' => $this->moduleHandler->getName($provider),
           '#wrapper_attributes' => [
             'colspan' => count($role_names) + 1,
-            'class' => ['module aqui nen'],
+            'class' => ['module'],
             'id' => 'module-' . $provider,
           ],
       ];
@@ -101,9 +84,8 @@ class CustomPermissionsForm extends UserPermissionsForm {
           $form['permissions'][$provider][$this->moduleHandler->getName($provider)]['permissions'][$perm]['description']['#context']['warning'] = $perm_item['warning'];
         }
         foreach ($role_names as $rid => $name) {
-          $form['permissions'][$provider][$this->moduleHandler->getName($provider)]['permissions'][$perm][$rid] = [
-            '#title' => $name . ': ' . $perm_item['title'],
-            '#title_display' => 'invisible',
+          $form['permissions'][$provider][$this->moduleHandler->getName($provider)]['permissions'][$perm][$rid] = [            
+            '#title' => $name,            
             '#wrapper_attributes' => [
               'class' => ['checkbox'],
             ],
@@ -130,6 +112,7 @@ class CustomPermissionsForm extends UserPermissionsForm {
     ];
 
     $form['#attached']['library'][] = 'user/drupal.user.permissions';
+    $form['#attached']['library'][] = 'system/drupal.system.modules';
 
     return $form;
   }  
