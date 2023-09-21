@@ -61,15 +61,25 @@ class CustomPermissionsForm extends UserPermissionsForm {
 
     foreach ($this->permissionsByProvider() as $provider => $permissions) {
       // Module name.
-      $form['permissions'][$provider] = [
+      /*$form['permissions'][$provider] = [
         [
+          '#type' => 'details',
+          '#title' => $this->moduleHandler->getName($provider),
           '#wrapper_attributes' => [
             'colspan' => count($role_names) + 1,
-            'class' => ['module'],
+            'class' => ['module aqui nen'],
             'id' => 'module-' . $provider,
           ],
-          '#markup' => $this->moduleHandler->getName($provider),
         ],
+      ];*/
+      $form['permissions'][$provider][$this->moduleHandler->getName($provider)] = [        
+          '#type' => 'details',
+          '#title' => $this->moduleHandler->getName($provider),
+          '#wrapper_attributes' => [
+            'colspan' => count($role_names) + 1,
+            'class' => ['module aqui nen'],
+            'id' => 'module-' . $provider,
+          ],
       ];
       foreach ($permissions as $perm => $perm_item) {
         // Fill in default values for the permission.
@@ -78,7 +88,7 @@ class CustomPermissionsForm extends UserPermissionsForm {
           'restrict access' => FALSE,
           'warning' => !empty($perm_item['restrict access']) ? $this->t('Warning: Give to trusted roles only; this permission has security implications.') : '',
         ];
-        $form['permissions'][$perm]['description'] = [
+        $form['permissions'][$provider][$this->moduleHandler->getName($provider)]['permissions'][$perm]['description'] = [
           '#type' => 'inline_template',
           '#template' => '<div class="permission"><span class="title">{{ title }}</span>{% if description or warning %}<div class="description">{% if warning %}<em class="permission-warning">{{ warning }}</em> {% endif %}{{ description }}</div>{% endif %}</div>',
           '#context' => [
@@ -87,11 +97,11 @@ class CustomPermissionsForm extends UserPermissionsForm {
         ];
         // Show the permission description.
         if (!$hide_descriptions) {
-          $form['permissions'][$perm]['description']['#context']['description'] = $perm_item['description'];
-          $form['permissions'][$perm]['description']['#context']['warning'] = $perm_item['warning'];
+          $form['permissions'][$provider][$this->moduleHandler->getName($provider)]['permissions'][$perm]['description']['#context']['description'] = $perm_item['description'];
+          $form['permissions'][$provider][$this->moduleHandler->getName($provider)]['permissions'][$perm]['description']['#context']['warning'] = $perm_item['warning'];
         }
         foreach ($role_names as $rid => $name) {
-          $form['permissions'][$perm][$rid] = [
+          $form['permissions'][$provider][$this->moduleHandler->getName($provider)]['permissions'][$perm][$rid] = [
             '#title' => $name . ': ' . $perm_item['title'],
             '#title_display' => 'invisible',
             '#wrapper_attributes' => [
@@ -104,10 +114,11 @@ class CustomPermissionsForm extends UserPermissionsForm {
           ];
           // Show a column of disabled but checked checkboxes.
           if ($admin_roles[$rid]) {
-            $form['permissions'][$perm][$rid]['#disabled'] = TRUE;
-            $form['permissions'][$perm][$rid]['#default_value'] = TRUE;
+            $form['permissions'][$provider][$this->moduleHandler->getName($provider)]['permissions'][$perm][$rid]['#disabled'] = TRUE;
+            $form['permissions'][$provider][$this->moduleHandler->getName($provider)]['permissions'][$perm][$rid]['#default_value'] = TRUE;
           }
         }
+       
       }
     }
 
